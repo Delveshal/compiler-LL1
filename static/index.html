@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>LL(1)分析法</title>
+    <style>
+        #box {
+            width: 30%;
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 20px;
+        }
+
+        #grammar {
+            box-sizing: border-box;
+            width: 100%;
+            height: 450px;
+            background: white;
+            border-radius: 5px;
+            overflow: auto;
+            padding: 10px;
+            box-shadow: 2px 2px rgba(0, 0, 0, 0.125);
+            resize: none;
+            margin-bottom: 20px;
+        }
+
+        #input {
+            box-sizing: border-box;
+            width: 100%;
+            height: 230px;
+            background: white;
+            border-radius: 5px;
+            overflow: auto;
+            padding: 10px;
+            box-shadow: 2px 2px rgba(0, 0, 0, 0.125);
+            resize: none;
+        }
+
+        #set {
+            box-sizing: border-box;
+            width: 100%;
+            height: 200px;
+            background: white;
+            border-radius: 5px;
+            overflow: auto;
+            padding: 10px;
+            border: 1px solid #757575;
+            margin-bottom: 20px;
+        }
+
+        #table {
+            box-sizing: border-box;
+            width: 100%;
+            background: white;
+            border-radius: 5px;
+            overflow: auto;
+            padding: 10px;
+            box-shadow: 2px 2px rgba(0, 0, 0, 0.125);
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        #table tr td {
+            border: 1px solid #757575;
+            line-height: 30px;
+        }
+
+        span {
+            font-size: 24px;
+            line-height: 30px;
+            font-family: Monospaced;
+        }
+    </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app">
+    <div id="box">
+        <span>文法:</span>
+        <br>
+        <textarea id="grammar" v-model="grammar" placeholder="添加文法" v-on:blur="submitGrammar"></textarea>
+        <br>
+        <span>输入串:</span>
+        <br>
+        <textarea id="input" v-model="input" placeholder="添加输入串" v-on:blur="submitInput"></textarea>
+    </div>
+    <div id="box">
+        <span>first set:</span>
+        <div id="set">
+            <li v-for="item in first">{{ item }}</li>
+        </div>
+        <span>follow set:</span>
+        <div id="set">
+            <li v-for="item in follow">{{ item }}</li>
+        </div>
+        <span>分析表</span>
+        <table id="table">
+            <tr v-for="item in table">
+                <td v-for="i in item">{{ i }}</td>
+            </tr>
+        </table>
+    </div>
+    <div id="box">
+        <span>分析过程：</span>
+        <table id="table">
+            <tr>
+                <td>符号栈</td>
+                <td>当前输入符号</td>
+                <td>输入串</td>
+                <td>说明</td>
+            </tr>
+            <tr v-for="item in step">
+                <td style="text-align: left">{{ item.symbol }}</td>
+                <td style="text-align: center">{{ item.cur }}</td>
+                <td style="text-align: right">{{ item.input }}</td>
+                <td>{{ item.mark }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            grammar: '',
+            message: '',
+            input: '',
+            first: [],
+            follow: [],
+            table: [],
+            step:[],
+
+        },
+        methods: {
+            submitGrammar() {
+                if (this.grammar === ''){
+                    return
+                }
+                let xhr = new XMLHttpRequest();
+                xhr.responseType = 'json';
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            this.table = xhr.response.data.table;
+                            this.first = xhr.response.data.first;
+                            this.follow = xhr.response.data.follow;
+                        }else{
+                            this.table = [];
+                            this.first = [];
+                            this.follow = [];
+                        }
+                    }
+                };
+                xhr.open('POST', '/api/solve', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send('grammar=' + encodeURIComponent(this.grammar));
+            },
+            submitInput(){
+                if (this.grammar === '' || this.input === '' ){
+                    return
+                }
+                let xhr = new XMLHttpRequest();
+                xhr.responseType = 'json';
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            this.step = xhr.response.data.step;
+                        }else {
+                            this.step = [];
+                            alert(xhr.response.msg);
+                        }
+                    }
+                };
+                xhr.open('POST', '/api/input', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                console.log(this.input);
+                xhr.send('grammar=' + encodeURIComponent(this.grammar) + '&' + 'input=' + encodeURIComponent(this.input));
+            }
+        }
+    })
+</script>
+</body>
+</html>
