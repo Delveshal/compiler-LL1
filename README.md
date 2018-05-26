@@ -12,6 +12,6 @@ open on the browser
 127.0.0.1:8080
 ```
 
-**note**:If you want to input $\epsilon$, please use `@` instead.
+**note**:If you want to input epsilon, please use `@` instead.
 
 ![example.png](LL(1).png)
