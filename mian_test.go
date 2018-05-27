@@ -47,10 +47,12 @@ func TestAll(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
+		in.Close()
 		bufOut, err := ioutil.ReadAll(out)
 		if err != nil {
 			t.Error(err)
 		}
+		out.Close()
 		err = Check(i, bufIn, bufOut)
 		if err != nil {
 			t.Error(err.Error())
