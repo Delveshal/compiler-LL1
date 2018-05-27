@@ -1,2 +1,4 @@
 S->abcA|bcA|cA
 A->abcA|@
+#
+bcabcabc

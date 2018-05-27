@@ -3,3 +3,5 @@ G->+TG|-TG|@
 T->FS
 S->*FS|/FS|@
 F->(E)|i
+#
+i*(i+i)-i/(i+i)
