@@ -1,4 +1,6 @@
 # compiler-LL1
+![build](https://travis-ci.org/Delveshal/compiler-LL1.svg?branch=master)
+
 编译原理-LL(1)文法自动生成语法分析程序
 
 # How to start it
