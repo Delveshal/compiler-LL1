@@ -1,0 +1,111 @@
+{
+	"rule": {
+		"65": ["bAS", "@"],
+		"83": ["aA", "d"]
+	},
+	"input": "",
+	"first_set": {
+		"65": {
+			"64": {},
+			"98": {}
+		},
+		"83": {
+			"100": {},
+			"97": {}
+		}
+	},
+	"follow_set": {
+		"100": {},
+		"64": {},
+		"65": {
+			"100": {},
+			"35": {},
+			"97": {}
+		},
+		"83": {
+			"100": {},
+			"35": {},
+			"97": {}
+		},
+		"97": {},
+		"98": {}
+	},
+	"chart": {
+		"65": {
+			"100": "A->@",
+			"35": "A->@",
+			"97": "A->@",
+			"98": "A->bAS"
+		},
+		"83": {
+			"100": "S->d",
+			"97": "S->aA"
+		}
+	},
+	"step": [{
+		"symbol": "#S",
+		"cur": "a",
+		"input": "babd#",
+		"mark": ""
+	}, {
+		"symbol": "#Aa",
+		"cur": "a",
+		"input": "babd#",
+		"mark": ""
+	}, {
+		"symbol": "#A",
+		"cur": "b",
+		"input": "abd#",
+		"mark": ""
+	}, {
+		"symbol": "#SAb",
+		"cur": "b",
+		"input": "abd#",
+		"mark": ""
+	}, {
+		"symbol": "#SA",
+		"cur": "a",
+		"input": "bd#",
+		"mark": ""
+	}, {
+		"symbol": "#S",
+		"cur": "a",
+		"input": "bd#",
+		"mark": ""
+	}, {
+		"symbol": "#Aa",
+		"cur": "a",
+		"input": "bd#",
+		"mark": ""
+	}, {
+		"symbol": "#A",
+		"cur": "b",
+		"input": "d#",
+		"mark": ""
+	}, {
+		"symbol": "#SAb",
+		"cur": "b",
+		"input": "d#",
+		"mark": ""
+	}, {
+		"symbol": "#SA",
+		"cur": "d",
+		"input": "#",
+		"mark": ""
+	}, {
+		"symbol": "#S",
+		"cur": "d",
+		"input": "#",
+		"mark": ""
+	}, {
+		"symbol": "#d",
+		"cur": "d",
+		"input": "#",
+		"mark": ""
+	}, {
+		"symbol": "#",
+		"cur": "#",
+		"input": "",
+		"mark": ""
+	}]
+}

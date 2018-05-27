@@ -88,8 +88,6 @@ func Check(id int, bufIn, bufOut []byte) error {
 	expect := &testCase{
 		id: id,
 	}
-	buf, _ := json.Marshal(actually)
-	fmt.Println(string(buf))
 	err = json.Unmarshal(bufOut, expect)
 	if err != nil {
 		return err
