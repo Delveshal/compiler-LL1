@@ -52,9 +52,9 @@ func (f *feedBack) Response() (err error) {
 	if f.DistWriter == nil {
 		return errors.New("DistWriter is empty")
 	}
-	if f.FbCode == 0{
+	if f.FbCode == 0 {
 		f.DistWriter.WriteHeader(http.StatusOK)
-	}else{
+	} else {
 		f.DistWriter.WriteHeader(f.FbCode)
 	}
 	buf, _ := json.Marshal(f)

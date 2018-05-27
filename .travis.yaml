@@ -4,6 +4,6 @@ go:
   - "1.10"
 
 install:
-
+  - go get -race -t -v ./...
 script:
   - go test -race -v ./...

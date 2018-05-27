@@ -4,22 +4,22 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"compiler-LL1/chart"
-	"compiler-LL1/util"
+	"github.com/Delveshal/compiler-LL1/chart"
+	"github.com/Delveshal/compiler-LL1/util"
 )
 
 type Item struct {
 	Symbol string `json:"symbol"`
-	Cur string `json:"cur"`
-	Input string `json:"input"`
-	Mark string `json:"mark"`
+	Cur    string `json:"cur"`
+	Input  string `json:"input"`
+	Mark   string `json:"mark"`
 }
 
 func Analyze(chart chart.Chart, start byte, input string) ([]*Item, error) {
-	if len(input) <=0 {
-		return nil,errors.New("empty")
+	if len(input) <= 0 {
+		return nil, errors.New("empty")
 	}
-	if input[len(input) - 1] != '#'{
+	if input[len(input)-1] != '#' {
 		input += "#"
 	}
 	symbol := []byte{'#', start}
@@ -28,9 +28,9 @@ func Analyze(chart chart.Chart, start byte, input string) ([]*Item, error) {
 	input = input[1:]
 	for {
 		step = append(step, &Item{
-			Symbol:string(symbol),
-			Cur:string(a),
-			Input:input,
+			Symbol: string(symbol),
+			Cur:    string(a),
+			Input:  input,
 		})
 		x := symbol[len(symbol)-1]
 		symbol = symbol[:len(symbol)-1]
@@ -59,5 +59,5 @@ func Analyze(chart chart.Chart, start byte, input string) ([]*Item, error) {
 			break
 		}
 	}
-	return step,nil
+	return step, nil
 }

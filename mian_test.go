@@ -2,20 +2,20 @@ package main
 
 import (
 	"bytes"
-	"compiler-LL1/analyzer"
-	"compiler-LL1/chart"
-	"compiler-LL1/first_set"
-	"compiler-LL1/follow_set"
-	"compiler-LL1/rule"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"reflect"
 	"strconv"
 	"strings"
 	"testing"
-	"reflect"
-	"fmt"
+	"github.com/Delveshal/compiler-LL1/rule"
+	"github.com/Delveshal/compiler-LL1/first_set"
+	"github.com/Delveshal/compiler-LL1/follow_set"
+	"github.com/Delveshal/compiler-LL1/chart"
+	"github.com/Delveshal/compiler-LL1/analyzer"
 )
 
 type testCase struct {
@@ -32,7 +32,7 @@ func TestAll(t *testing.T) {
 	dir := "test_data"
 	i := 0
 	for {
-		if !PathExist(dir + string(filepath.Separator) + strconv.Itoa(i) + ".in"){
+		if !PathExist(dir + string(filepath.Separator) + strconv.Itoa(i) + ".in") {
 			break
 		}
 		in, err := os.Open(dir + string(filepath.Separator) + strconv.Itoa(i) + ".in")
@@ -72,7 +72,7 @@ func Check(id int, bufIn, bufOut []byte) error {
 	start := grammar[0][0]
 	followSet := follow_set.GetFollowFrom(rules, start, firstSet)
 	ch := chart.GetChartFrom(firstSet, followSet, rules)
-	input := strings.Replace(string(bufIn[t+1:]),"\n","",-1)
+	input := strings.Replace(string(bufIn[t+1:]), "\n", "", -1)
 	step, err := analyzer.Analyze(ch, start, input)
 	if err != nil {
 		return err
@@ -86,15 +86,15 @@ func Check(id int, bufIn, bufOut []byte) error {
 		Step:      step,
 	}
 	expect := &testCase{
-		id:id,
+		id: id,
 	}
-	buf , _ := json.Marshal(actually)
+	buf, _ := json.Marshal(actually)
 	fmt.Println(string(buf))
 	err = json.Unmarshal(bufOut, expect)
 	if err != nil {
 		return err
 	}
-	if ok := reflect.DeepEqual(actually,expect);!ok{
+	if ok := reflect.DeepEqual(actually, expect); !ok {
 		return fmt.Errorf("not equal")
 	}
 	return nil

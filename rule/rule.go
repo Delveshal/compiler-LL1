@@ -3,7 +3,7 @@ package rule
 import (
 	"fmt"
 	"strings"
-	"compiler-LL1/util"
+	"github.com/Delveshal/compiler-LL1/util"
 )
 
 type Rules map[byte][]string
@@ -56,21 +56,21 @@ func (r Rules) HaveEmptyFormula(first byte) bool {
 	return false
 }
 
-func (r Rules) TheFirstItemIs(first ,item byte) string {
-	for _, value := range r[first]{
-		if value[0] == item{
+func (r Rules) TheFirstItemIs(first, item byte) string {
+	for _, value := range r[first] {
+		if value[0] == item {
 			return value
 		}
 	}
 	return ""
 }
 
-func (r Rules) Dfs(first ,terminal byte) bool {
+func (r Rules) Dfs(first, terminal byte) bool {
 	for i := range r[first] {
 		if util.IsTerminal(r[first][i][0]) && r[first][i][0] == terminal {
 			return true
-		}else if !util.IsTerminal(r[first][i][0]){
-			if ok := r.Dfs(r[first][i][0],terminal);ok{
+		} else if !util.IsTerminal(r[first][i][0]) {
+			if ok := r.Dfs(r[first][i][0], terminal); ok {
 				return true
 			}
 		}

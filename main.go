@@ -1,16 +1,16 @@
 package main
 
 import (
-	"os"
-	"net/http"
+	"github.com/Delveshal/compiler-LL1/analyzer"
+	"github.com/Delveshal/compiler-LL1/chart"
+	"github.com/Delveshal/compiler-LL1/first_set"
+	"github.com/Delveshal/compiler-LL1/follow_set"
+	"github.com/Delveshal/compiler-LL1/rule"
+	"github.com/Delveshal/compiler-LL1/util/feedback"
 	"io"
+	"net/http"
+	"os"
 	"strings"
-	"compiler-LL1/util/feedback"
-	"compiler-LL1/rule"
-	"compiler-LL1/first_set"
-	"compiler-LL1/follow_set"
-	"compiler-LL1/chart"
-	"compiler-LL1/analyzer"
 )
 
 func main() {

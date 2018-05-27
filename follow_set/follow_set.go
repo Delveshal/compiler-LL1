@@ -1,11 +1,11 @@
 package follow_set
 
 import (
-	"strings"
 	"fmt"
-	"compiler-LL1/rule"
-	"compiler-LL1/first_set"
-	"compiler-LL1/util"
+	"strings"
+	"github.com/Delveshal/compiler-LL1/rule"
+	"github.com/Delveshal/compiler-LL1/first_set"
+	"github.com/Delveshal/compiler-LL1/util"
 )
 
 type FollowSet map[byte]map[byte]struct{}
@@ -15,7 +15,7 @@ func (f FollowSet) String() string {
 	for key, value := range f {
 		build.WriteString(fmt.Sprintf("FOLLOW(%c)={ ", key))
 		for item := range value {
-			build.WriteString(fmt.Sprintf("%c ",item))
+			build.WriteString(fmt.Sprintf("%c ", item))
 		}
 		build.WriteString("}\n")
 	}
@@ -37,7 +37,7 @@ func (f FollowSet) Strings() []string {
 	return ans
 }
 
-func GetFollowFrom(rules rule.Rules,start byte,firstSet first_set.FirstSet) FollowSet {
+func GetFollowFrom(rules rule.Rules, start byte, firstSet first_set.FirstSet) FollowSet {
 	followSet := make(FollowSet)
 
 	followSet[start] = make(map[byte]struct{})
@@ -55,16 +55,16 @@ func GetFollowFrom(rules rule.Rules,start byte,firstSet first_set.FirstSet) Foll
 					}
 					if !util.IsTerminal(v[i]) {
 						if util.IsTerminal(v[i+1]) {
-							if MergeSet(followSet[v[i]], map[byte]struct{}{v[i+1]: {}}) != 0{
+							if MergeSet(followSet[v[i]], map[byte]struct{}{v[i+1]: {}}) != 0 {
 								changed = true
 							}
 						} else {
-							if RemoveEmptyAndMergeSet(followSet[v[i]], firstSet[v[i+1]]) != 0{
+							if RemoveEmptyAndMergeSet(followSet[v[i]], firstSet[v[i+1]]) != 0 {
 								changed = true
 							}
 						}
 						if firstSet.HaveEmpty(v[i+1]) {
-							if MergeSet(followSet[v[i]], followSet[key]) != 0{
+							if MergeSet(followSet[v[i]], followSet[key]) != 0 {
 								changed = true
 							}
 						}
@@ -75,8 +75,8 @@ func GetFollowFrom(rules rule.Rules,start byte,firstSet first_set.FirstSet) Foll
 				if followSet[v[len(v)-1]] == nil {
 					followSet[v[len(v)-1]] = make(map[byte]struct{})
 				}
-				if !util.IsTerminal(v[len(v)-1]){
-					if MergeSet(followSet[v[len(v)-1]], followSet[key]) != 0{
+				if !util.IsTerminal(v[len(v)-1]) {
+					if MergeSet(followSet[v[len(v)-1]], followSet[key]) != 0 {
 						changed = true
 					}
 				}
@@ -91,9 +91,9 @@ func GetFollowFrom(rules rule.Rules,start byte,firstSet first_set.FirstSet) Foll
 
 func RemoveEmptyAndMergeSet(a map[byte]struct{}, b map[byte]struct{}) int {
 	flag := false
-	if _, flag = b['@'];flag {
+	if _, flag = b['@']; flag {
 		flag = true
-		delete(b,'@')
+		delete(b, '@')
 	}
 	count := 0
 	for key, value := range b {

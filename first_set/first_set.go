@@ -3,7 +3,7 @@ package first_set
 import (
 	"fmt"
 	"strings"
-	"compiler-LL1/rule"
+	"github.com/Delveshal/compiler-LL1/rule"
 )
 
 type FirstSet map[byte]map[byte]struct{}
