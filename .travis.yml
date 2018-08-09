@@ -10,11 +10,11 @@ install:
 script:
   - go test -coverprofile=test.coverprofile -coverpkg \
   "github.com/Delveshal/compiler-LL1/analyzer" \
-	"github.com/Delveshal/compiler-LL1/chart" \
-	"github.com/Delveshal/compiler-LL1/first_set" \
-	"github.com/Delveshal/compiler-LL1/follow_set" \
-	"github.com/Delveshal/compiler-LL1/rule" \
-	"github.com/Delveshal/compiler-LL1/util/feedback" \
+  "github.com/Delveshal/compiler-LL1/chart" \
+  "github.com/Delveshal/compiler-LL1/first_set" \
+  "github.com/Delveshal/compiler-LL1/follow_set" \
+  "github.com/Delveshal/compiler-LL1/rule" \
+  "github.com/Delveshal/compiler-LL1/util/feedback" \
   ./...
   - go build
   - gover
