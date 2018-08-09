@@ -1,5 +1,7 @@
 # compiler-LL1
-![build](https://travis-ci.org/Delveshal/compiler-LL1.svg?branch=master)
+[![Build Status](https://travis-ci.org/Delveshal/compiler-LL1.svg?branch=master)]
+(https://travis-ci.org/Delveshal/compiler-LL1)
+[![Coverage Status](https://coveralls.io/repos/github/Delveshal/compiler-LL1/badge.svg?branch=master)](https://coveralls.io/github/Delveshal/compiler-LL1?branch=master)
 
 编译原理-LL(1)文法自动生成语法分析程序
 
