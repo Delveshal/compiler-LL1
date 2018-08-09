@@ -8,14 +8,14 @@ install:
   - go get github.com/modocache/gover
   - go get github.com/mattn/goveralls
 script:
-  - go test -coverprofile=test.coverprofile -coverpkg \
-  "github.com/Delveshal/compiler-LL1/analyzer" \
-  "github.com/Delveshal/compiler-LL1/chart" \
-  "github.com/Delveshal/compiler-LL1/first_set" \
-  "github.com/Delveshal/compiler-LL1/follow_set" \
-  "github.com/Delveshal/compiler-LL1/rule" \
-  "github.com/Delveshal/compiler-LL1/util/feedback" \
-  ./...
-  - go build
+  - >
+    go test -race -coverprofile=test.coverprofile -coverpkg 
+    "github.com/Delveshal/compiler-LL1/analyzer" 
+    "github.com/Delveshal/compiler-LL1/chart" 
+    "github.com/Delveshal/compiler-LL1/first_set" 
+    "github.com/Delveshal/compiler-LL1/follow_set" 
+    "github.com/Delveshal/compiler-LL1/rule" 
+    "github.com/Delveshal/compiler-LL1/util/feedback" 
+    ./...
   - gover
   - goveralls -coverprofile=gover.coverprofile -service=travis-ci
