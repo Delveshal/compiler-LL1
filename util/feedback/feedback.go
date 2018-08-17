@@ -3,7 +3,6 @@ package feedback
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"net/http"
 )
 
@@ -57,9 +56,9 @@ func (f *feedBack) Response() (err error) {
 	} else {
 		f.DistWriter.WriteHeader(f.FbCode)
 	}
-	f.DistWriter.Header().Add("Content-Type","application/json; charset=utf-8")
+	f.DistWriter.Header().Set("Content-Type","application/json; charset=utf-8")
 	buf, _ := json.Marshal(f)
-	fmt.Fprint(f.DistWriter, buf)
+        f.DistWriter.Write(buf)
 	f.Clear()
 	return nil
 }
