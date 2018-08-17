@@ -57,8 +57,9 @@ func (f *feedBack) Response() (err error) {
 	} else {
 		f.DistWriter.WriteHeader(f.FbCode)
 	}
+	f.DistWriter.Header().Add("Content-Type","application/json; charset=utf-8")
 	buf, _ := json.Marshal(f)
-	fmt.Fprint(f.DistWriter, string(buf))
+	fmt.Fprint(f.DistWriter, buf)
 	f.Clear()
 	return nil
 }
