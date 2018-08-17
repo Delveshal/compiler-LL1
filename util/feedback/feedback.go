@@ -58,7 +58,7 @@ func (f *feedBack) Response() (err error) {
 	}
 	f.DistWriter.Header().Set("Content-Type","application/json; charset=utf-8")
 	buf, _ := json.Marshal(f)
-        f.DistWriter.Write(buf)
+	f.DistWriter.Write(buf)
 	f.Clear()
 	return nil
 }
